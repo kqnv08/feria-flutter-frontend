@@ -1,0 +1,14 @@
+query saleListPage($saleCriteria:FilterCriteriaInfo!){
+  saleListPage(saleCriteria:$saleCriteria){
+    data{
+      id
+      total
+      name
+      createdAt
+    }
+    limit
+    page
+    totalPages
+    totalRecords
+  }
+}

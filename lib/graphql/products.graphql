@@ -1,0 +1,23 @@
+query productFindAll{
+  productFindAll{
+    id
+    name
+    code
+    price
+  }
+}
+
+query productListPage($filterCriteria:FilterCriteriaInfo!){
+  productListPage(productCriteria:$filterCriteria){
+    data{
+      name
+      code
+      price
+      id
+    }
+    limit
+    page
+    totalPages
+    totalRecords
+  }
+}
