@@ -12,3 +12,9 @@ query saleListPage($saleCriteria:FilterCriteriaInfo!){
     totalRecords
   }
 }
+
+mutation createSale($saleInputDto:NewSaleInputDto!){
+  createSale(saleInputDto:$saleInputDto){
+    success
+  }
+}

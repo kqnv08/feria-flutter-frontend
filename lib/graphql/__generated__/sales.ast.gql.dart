@@ -99,4 +99,45 @@ const saleListPage = _i1.OperationDefinitionNode(
     )
   ]),
 );
-const document = _i1.DocumentNode(definitions: [saleListPage]);
+const createSale = _i1.OperationDefinitionNode(
+  type: _i1.OperationType.mutation,
+  name: _i1.NameNode(value: 'createSale'),
+  variableDefinitions: [
+    _i1.VariableDefinitionNode(
+      variable: _i1.VariableNode(name: _i1.NameNode(value: 'saleInputDto')),
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'NewSaleInputDto'),
+        isNonNull: true,
+      ),
+      defaultValue: _i1.DefaultValueNode(value: null),
+      directives: [],
+    )
+  ],
+  directives: [],
+  selectionSet: _i1.SelectionSetNode(selections: [
+    _i1.FieldNode(
+      name: _i1.NameNode(value: 'createSale'),
+      alias: null,
+      arguments: [
+        _i1.ArgumentNode(
+          name: _i1.NameNode(value: 'saleInputDto'),
+          value: _i1.VariableNode(name: _i1.NameNode(value: 'saleInputDto')),
+        )
+      ],
+      directives: [],
+      selectionSet: _i1.SelectionSetNode(selections: [
+        _i1.FieldNode(
+          name: _i1.NameNode(value: 'success'),
+          alias: null,
+          arguments: [],
+          directives: [],
+          selectionSet: null,
+        )
+      ]),
+    )
+  ]),
+);
+const document = _i1.DocumentNode(definitions: [
+  saleListPage,
+  createSale,
+]);

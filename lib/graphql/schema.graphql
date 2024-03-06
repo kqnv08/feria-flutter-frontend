@@ -75,7 +75,7 @@ type Mutation {
   createBrand(brandInputDto: BrandInputDto!): Brand!
   createCategory(categoryInputDto: CategoryInputDto!): Category!
   createProduct(productInputDto: ProductInputDto!): Product!
-  createSale(saleInputDto: SaleInputDto!): Sale!
+  createSale(saleInputDto: NewSaleInputDto!): GenericResult!
   createSaleDetail(saleDetailInputDto: SaleDetailInputDto!): SaleDetail!
   createUser(userInputDto: UserInputDto!): User!
   loadProduct: GenericResult!
@@ -94,6 +94,10 @@ type Mutation {
     saleDetailInputDto: SaleDetailInputDto!
   ): SaleDetail!
   updateUser(id: Int!, userInputDto: UserInputDto!): User!
+}
+
+input NewSaleInputDto {
+  saleDetails: [SaleDetailInputDto!]!
 }
 
 type Product {
@@ -185,7 +189,10 @@ type SaleDetail {
 }
 
 input SaleDetailInputDto {
-  name: String!
+  price: Float!
+  productId: ID!
+  quantity: Int!
+  saleId: ID
 }
 
 type SaleDetailListPageInfoResponse {

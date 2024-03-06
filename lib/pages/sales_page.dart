@@ -2,6 +2,7 @@ import 'package:ferry/ferry.dart';
 import 'package:ferry_flutter/ferry_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_test/components/shared_scaffold.dart';
 import 'package:graphql_test/graphql/__generated__/sales.req.gql.dart';
@@ -21,7 +22,6 @@ class SaleListWidget extends StatefulWidget {
 
 class SaleListWidgetState extends State<SaleListWidget> {
   final client = GetIt.I<Client>();
-  int _totalItems = 0;
 
   int _sortColumIndex = 0;
   bool _orderSort = true;
@@ -76,7 +76,13 @@ class SaleListWidgetState extends State<SaleListWidget> {
   @override
   Widget build(BuildContext context) {
     return SharedScaffold(
-        title: "Productos",
+        key: const Key("sales"),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => {context.go("/sale-form")},
+          tooltip: 'Increment',
+          child: const Icon(Icons.add),
+        ),
+        title: "Ventas",
         body: Center(
           child: Operation(
             client: client,
@@ -138,7 +144,7 @@ class SaleListWidgetState extends State<SaleListWidget> {
                           onSort: _handleSort,
                         ),
                       ],
-                      source: MyData(data: productListPage)));
+                      source: MyData(data: productListPage, context: context)));
             },
           ),
         ));
@@ -146,7 +152,8 @@ class SaleListWidgetState extends State<SaleListWidget> {
 }
 
 class MyData extends DataTableSource {
-  MyData({this.data});
+  final BuildContext context;
+  MyData({this.data, required this.context});
   var data;
   @override
   DataRow? getRow(int index) {
@@ -154,8 +161,8 @@ class MyData extends DataTableSource {
     final row = data.data[pageIndex];
     final formatedDate = DateFormat('dd-MM-yyyy HH:mm:ss')
         .format(DateTime.parse(row.createdAt.value));
-        
-    return DataRow(cells: [
+
+    return DataRow(onLongPress: () => context.go("/sale/$row.id"), cells: [
       DataCell(Text(row.id)),
       DataCell(Text(row.createdAt == null ? "---" : formatedDate)),
       DataCell(Text(row.name ?? "---")),
@@ -164,14 +171,11 @@ class MyData extends DataTableSource {
   }
 
   @override
-  // TODO: implement isRowCountApproximate
   bool get isRowCountApproximate => false;
 
   @override
-  // TODO: implement rowCount
   int get rowCount => data?.totalRecords ?? 0;
 
   @override
-  // TODO: implement selectedRowCount
   int get selectedRowCount => 0;
 }

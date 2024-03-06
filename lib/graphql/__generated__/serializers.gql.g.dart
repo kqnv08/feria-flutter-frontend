@@ -14,10 +14,21 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GFilterCriteriaInfo.serializer)
       ..add(GIFilterCriterion.serializer)
       ..add(GISortCriteria.serializer)
+      ..add(GNewSaleInputDto.serializer)
       ..add(GProductInputDto.serializer)
+      ..add(GSaleData.serializer)
+      ..add(GSaleData_sale.serializer)
+      ..add(GSaleData_sale_details.serializer)
+      ..add(GSaleData_sale_details_product.serializer)
       ..add(GSaleDetailInputDto.serializer)
       ..add(GSaleInputDto.serializer)
+      ..add(GSaleReq.serializer)
+      ..add(GSaleVars.serializer)
       ..add(GUserInputDto.serializer)
+      ..add(GcreateSaleData.serializer)
+      ..add(GcreateSaleData_createSale.serializer)
+      ..add(GcreateSaleReq.serializer)
+      ..add(GcreateSaleVars.serializer)
       ..add(GproductFindAllData.serializer)
       ..add(GproductFindAllData_productFindAll.serializer)
       ..add(GproductFindAllReq.serializer)
@@ -35,6 +46,14 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(GIFilterCriterion)]),
           () => new ListBuilder<GIFilterCriterion>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(GSaleData_sale_details)]),
+          () => new ListBuilder<GSaleData_sale_details>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(GSaleDetailInputDto)]),
+          () => new ListBuilder<GSaleDetailInputDto>())
       ..addBuilderFactory(
           const FullType(BuiltList,
               const [const FullType(GproductFindAllData_productFindAll)]),

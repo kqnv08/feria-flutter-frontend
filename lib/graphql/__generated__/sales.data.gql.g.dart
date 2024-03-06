@@ -14,6 +14,10 @@ Serializer<GsaleListPageData_saleListPage>
 Serializer<GsaleListPageData_saleListPage_data>
     _$gsaleListPageDataSaleListPageDataSerializer =
     new _$GsaleListPageData_saleListPage_dataSerializer();
+Serializer<GcreateSaleData> _$gcreateSaleDataSerializer =
+    new _$GcreateSaleDataSerializer();
+Serializer<GcreateSaleData_createSale> _$gcreateSaleDataCreateSaleSerializer =
+    new _$GcreateSaleData_createSaleSerializer();
 
 class _$GsaleListPageDataSerializer
     implements StructuredSerializer<GsaleListPageData> {
@@ -244,6 +248,109 @@ class _$GsaleListPageData_saleListPage_dataSerializer
         case 'createdAt':
           result.createdAt.replace(serializers.deserialize(value,
               specifiedType: const FullType(_i2.GDateTime))! as _i2.GDateTime);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GcreateSaleDataSerializer
+    implements StructuredSerializer<GcreateSaleData> {
+  @override
+  final Iterable<Type> types = const [GcreateSaleData, _$GcreateSaleData];
+  @override
+  final String wireName = 'GcreateSaleData';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, GcreateSaleData object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      '__typename',
+      serializers.serialize(object.G__typename,
+          specifiedType: const FullType(String)),
+      'createSale',
+      serializers.serialize(object.createSale,
+          specifiedType: const FullType(GcreateSaleData_createSale)),
+    ];
+
+    return result;
+  }
+
+  @override
+  GcreateSaleData deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GcreateSaleDataBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case '__typename':
+          result.G__typename = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'createSale':
+          result.createSale.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(GcreateSaleData_createSale))!
+              as GcreateSaleData_createSale);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GcreateSaleData_createSaleSerializer
+    implements StructuredSerializer<GcreateSaleData_createSale> {
+  @override
+  final Iterable<Type> types = const [
+    GcreateSaleData_createSale,
+    _$GcreateSaleData_createSale
+  ];
+  @override
+  final String wireName = 'GcreateSaleData_createSale';
+
+  @override
+  Iterable<Object?> serialize(
+      Serializers serializers, GcreateSaleData_createSale object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      '__typename',
+      serializers.serialize(object.G__typename,
+          specifiedType: const FullType(String)),
+      'success',
+      serializers.serialize(object.success,
+          specifiedType: const FullType(bool)),
+    ];
+
+    return result;
+  }
+
+  @override
+  GcreateSaleData_createSale deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GcreateSaleData_createSaleBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case '__typename':
+          result.G__typename = serializers.deserialize(value,
+              specifiedType: const FullType(String))! as String;
+          break;
+        case 'success':
+          result.success = serializers.deserialize(value,
+              specifiedType: const FullType(bool))! as bool;
           break;
       }
     }
@@ -700,6 +807,230 @@ class GsaleListPageData_saleListPage_dataBuilder
       }
       rethrow;
     }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GcreateSaleData extends GcreateSaleData {
+  @override
+  final String G__typename;
+  @override
+  final GcreateSaleData_createSale createSale;
+
+  factory _$GcreateSaleData([void Function(GcreateSaleDataBuilder)? updates]) =>
+      (new GcreateSaleDataBuilder()..update(updates))._build();
+
+  _$GcreateSaleData._({required this.G__typename, required this.createSale})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename, r'GcreateSaleData', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(
+        createSale, r'GcreateSaleData', 'createSale');
+  }
+
+  @override
+  GcreateSaleData rebuild(void Function(GcreateSaleDataBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GcreateSaleDataBuilder toBuilder() =>
+      new GcreateSaleDataBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GcreateSaleData &&
+        G__typename == other.G__typename &&
+        createSale == other.createSale;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, G__typename.hashCode);
+    _$hash = $jc(_$hash, createSale.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GcreateSaleData')
+          ..add('G__typename', G__typename)
+          ..add('createSale', createSale))
+        .toString();
+  }
+}
+
+class GcreateSaleDataBuilder
+    implements Builder<GcreateSaleData, GcreateSaleDataBuilder> {
+  _$GcreateSaleData? _$v;
+
+  String? _G__typename;
+  String? get G__typename => _$this._G__typename;
+  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
+
+  GcreateSaleData_createSaleBuilder? _createSale;
+  GcreateSaleData_createSaleBuilder get createSale =>
+      _$this._createSale ??= new GcreateSaleData_createSaleBuilder();
+  set createSale(GcreateSaleData_createSaleBuilder? createSale) =>
+      _$this._createSale = createSale;
+
+  GcreateSaleDataBuilder() {
+    GcreateSaleData._initializeBuilder(this);
+  }
+
+  GcreateSaleDataBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _G__typename = $v.G__typename;
+      _createSale = $v.createSale.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GcreateSaleData other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GcreateSaleData;
+  }
+
+  @override
+  void update(void Function(GcreateSaleDataBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GcreateSaleData build() => _build();
+
+  _$GcreateSaleData _build() {
+    _$GcreateSaleData _$result;
+    try {
+      _$result = _$v ??
+          new _$GcreateSaleData._(
+              G__typename: BuiltValueNullFieldError.checkNotNull(
+                  G__typename, r'GcreateSaleData', 'G__typename'),
+              createSale: createSale.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'createSale';
+        createSale.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'GcreateSaleData', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GcreateSaleData_createSale extends GcreateSaleData_createSale {
+  @override
+  final String G__typename;
+  @override
+  final bool success;
+
+  factory _$GcreateSaleData_createSale(
+          [void Function(GcreateSaleData_createSaleBuilder)? updates]) =>
+      (new GcreateSaleData_createSaleBuilder()..update(updates))._build();
+
+  _$GcreateSaleData_createSale._(
+      {required this.G__typename, required this.success})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        G__typename, r'GcreateSaleData_createSale', 'G__typename');
+    BuiltValueNullFieldError.checkNotNull(
+        success, r'GcreateSaleData_createSale', 'success');
+  }
+
+  @override
+  GcreateSaleData_createSale rebuild(
+          void Function(GcreateSaleData_createSaleBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GcreateSaleData_createSaleBuilder toBuilder() =>
+      new GcreateSaleData_createSaleBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GcreateSaleData_createSale &&
+        G__typename == other.G__typename &&
+        success == other.success;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, G__typename.hashCode);
+    _$hash = $jc(_$hash, success.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GcreateSaleData_createSale')
+          ..add('G__typename', G__typename)
+          ..add('success', success))
+        .toString();
+  }
+}
+
+class GcreateSaleData_createSaleBuilder
+    implements
+        Builder<GcreateSaleData_createSale, GcreateSaleData_createSaleBuilder> {
+  _$GcreateSaleData_createSale? _$v;
+
+  String? _G__typename;
+  String? get G__typename => _$this._G__typename;
+  set G__typename(String? G__typename) => _$this._G__typename = G__typename;
+
+  bool? _success;
+  bool? get success => _$this._success;
+  set success(bool? success) => _$this._success = success;
+
+  GcreateSaleData_createSaleBuilder() {
+    GcreateSaleData_createSale._initializeBuilder(this);
+  }
+
+  GcreateSaleData_createSaleBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _G__typename = $v.G__typename;
+      _success = $v.success;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GcreateSaleData_createSale other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GcreateSaleData_createSale;
+  }
+
+  @override
+  void update(void Function(GcreateSaleData_createSaleBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GcreateSaleData_createSale build() => _build();
+
+  _$GcreateSaleData_createSale _build() {
+    final _$result = _$v ??
+        new _$GcreateSaleData_createSale._(
+            G__typename: BuiltValueNullFieldError.checkNotNull(
+                G__typename, r'GcreateSaleData_createSale', 'G__typename'),
+            success: BuiltValueNullFieldError.checkNotNull(
+                success, r'GcreateSaleData_createSale', 'success'));
     replace(_$result);
     return _$result;
   }

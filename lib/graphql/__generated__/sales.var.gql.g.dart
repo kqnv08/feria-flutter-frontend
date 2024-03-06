@@ -8,6 +8,8 @@ part of 'sales.var.gql.dart';
 
 Serializer<GsaleListPageVars> _$gsaleListPageVarsSerializer =
     new _$GsaleListPageVarsSerializer();
+Serializer<GcreateSaleVars> _$gcreateSaleVarsSerializer =
+    new _$GcreateSaleVarsSerializer();
 
 class _$GsaleListPageVarsSerializer
     implements StructuredSerializer<GsaleListPageVars> {
@@ -44,6 +46,49 @@ class _$GsaleListPageVarsSerializer
           result.saleCriteria.replace(serializers.deserialize(value,
                   specifiedType: const FullType(_i1.GFilterCriteriaInfo))!
               as _i1.GFilterCriteriaInfo);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GcreateSaleVarsSerializer
+    implements StructuredSerializer<GcreateSaleVars> {
+  @override
+  final Iterable<Type> types = const [GcreateSaleVars, _$GcreateSaleVars];
+  @override
+  final String wireName = 'GcreateSaleVars';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, GcreateSaleVars object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'saleInputDto',
+      serializers.serialize(object.saleInputDto,
+          specifiedType: const FullType(_i1.GNewSaleInputDto)),
+    ];
+
+    return result;
+  }
+
+  @override
+  GcreateSaleVars deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GcreateSaleVarsBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'saleInputDto':
+          result.saleInputDto.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(_i1.GNewSaleInputDto))!
+              as _i1.GNewSaleInputDto);
           break;
       }
     }
@@ -143,6 +188,104 @@ class GsaleListPageVarsBuilder
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             r'GsaleListPageVars', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$GcreateSaleVars extends GcreateSaleVars {
+  @override
+  final _i1.GNewSaleInputDto saleInputDto;
+
+  factory _$GcreateSaleVars([void Function(GcreateSaleVarsBuilder)? updates]) =>
+      (new GcreateSaleVarsBuilder()..update(updates))._build();
+
+  _$GcreateSaleVars._({required this.saleInputDto}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        saleInputDto, r'GcreateSaleVars', 'saleInputDto');
+  }
+
+  @override
+  GcreateSaleVars rebuild(void Function(GcreateSaleVarsBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GcreateSaleVarsBuilder toBuilder() =>
+      new GcreateSaleVarsBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GcreateSaleVars && saleInputDto == other.saleInputDto;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, saleInputDto.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GcreateSaleVars')
+          ..add('saleInputDto', saleInputDto))
+        .toString();
+  }
+}
+
+class GcreateSaleVarsBuilder
+    implements Builder<GcreateSaleVars, GcreateSaleVarsBuilder> {
+  _$GcreateSaleVars? _$v;
+
+  _i1.GNewSaleInputDtoBuilder? _saleInputDto;
+  _i1.GNewSaleInputDtoBuilder get saleInputDto =>
+      _$this._saleInputDto ??= new _i1.GNewSaleInputDtoBuilder();
+  set saleInputDto(_i1.GNewSaleInputDtoBuilder? saleInputDto) =>
+      _$this._saleInputDto = saleInputDto;
+
+  GcreateSaleVarsBuilder();
+
+  GcreateSaleVarsBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _saleInputDto = $v.saleInputDto.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GcreateSaleVars other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GcreateSaleVars;
+  }
+
+  @override
+  void update(void Function(GcreateSaleVarsBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GcreateSaleVars build() => _build();
+
+  _$GcreateSaleVars _build() {
+    _$GcreateSaleVars _$result;
+    try {
+      _$result =
+          _$v ?? new _$GcreateSaleVars._(saleInputDto: saleInputDto.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'saleInputDto';
+        saleInputDto.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'GcreateSaleVars', _$failedField, e.toString());
       }
       rethrow;
     }

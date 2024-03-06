@@ -25,14 +25,39 @@ class _$GproductFindAllVarsSerializer
   Iterable<Object?> serialize(
       Serializers serializers, GproductFindAllVars object,
       {FullType specifiedType = FullType.unspecified}) {
-    return <Object?>[];
+    final result = <Object?>[];
+    Object? value;
+    value = object.productFilter;
+    if (value != null) {
+      result
+        ..add('productFilter')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(_i1.GFilterCriteriaInfo)));
+    }
+    return result;
   }
 
   @override
   GproductFindAllVars deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    return new GproductFindAllVarsBuilder().build();
+    final result = new GproductFindAllVarsBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'productFilter':
+          result.productFilter.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(_i1.GFilterCriteriaInfo))!
+              as _i1.GFilterCriteriaInfo);
+          break;
+      }
+    }
+
+    return result.build();
   }
 }
 
@@ -53,7 +78,7 @@ class _$GproductListPageVarsSerializer
     final result = <Object?>[
       'filterCriteria',
       serializers.serialize(object.filterCriteria,
-          specifiedType: const FullType(_i2.GFilterCriteriaInfo)),
+          specifiedType: const FullType(_i1.GFilterCriteriaInfo)),
     ];
 
     return result;
@@ -73,8 +98,8 @@ class _$GproductListPageVarsSerializer
       switch (key) {
         case 'filterCriteria':
           result.filterCriteria.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(_i2.GFilterCriteriaInfo))!
-              as _i2.GFilterCriteriaInfo);
+                  specifiedType: const FullType(_i1.GFilterCriteriaInfo))!
+              as _i1.GFilterCriteriaInfo);
           break;
       }
     }
@@ -84,11 +109,14 @@ class _$GproductListPageVarsSerializer
 }
 
 class _$GproductFindAllVars extends GproductFindAllVars {
+  @override
+  final _i1.GFilterCriteriaInfo? productFilter;
+
   factory _$GproductFindAllVars(
           [void Function(GproductFindAllVarsBuilder)? updates]) =>
       (new GproductFindAllVarsBuilder()..update(updates))._build();
 
-  _$GproductFindAllVars._() : super._();
+  _$GproductFindAllVars._({this.productFilter}) : super._();
 
   @override
   GproductFindAllVars rebuild(
@@ -102,17 +130,22 @@ class _$GproductFindAllVars extends GproductFindAllVars {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GproductFindAllVars;
+    return other is GproductFindAllVars && productFilter == other.productFilter;
   }
 
   @override
   int get hashCode {
-    return 786827731;
+    var _$hash = 0;
+    _$hash = $jc(_$hash, productFilter.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return newBuiltValueToStringHelper(r'GproductFindAllVars').toString();
+    return (newBuiltValueToStringHelper(r'GproductFindAllVars')
+          ..add('productFilter', productFilter))
+        .toString();
   }
 }
 
@@ -120,7 +153,22 @@ class GproductFindAllVarsBuilder
     implements Builder<GproductFindAllVars, GproductFindAllVarsBuilder> {
   _$GproductFindAllVars? _$v;
 
+  _i1.GFilterCriteriaInfoBuilder? _productFilter;
+  _i1.GFilterCriteriaInfoBuilder get productFilter =>
+      _$this._productFilter ??= new _i1.GFilterCriteriaInfoBuilder();
+  set productFilter(_i1.GFilterCriteriaInfoBuilder? productFilter) =>
+      _$this._productFilter = productFilter;
+
   GproductFindAllVarsBuilder();
+
+  GproductFindAllVarsBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _productFilter = $v.productFilter?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
 
   @override
   void replace(GproductFindAllVars other) {
@@ -137,7 +185,21 @@ class GproductFindAllVarsBuilder
   GproductFindAllVars build() => _build();
 
   _$GproductFindAllVars _build() {
-    final _$result = _$v ?? new _$GproductFindAllVars._();
+    _$GproductFindAllVars _$result;
+    try {
+      _$result = _$v ??
+          new _$GproductFindAllVars._(productFilter: _productFilter?.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'productFilter';
+        _productFilter?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'GproductFindAllVars', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -145,7 +207,7 @@ class GproductFindAllVarsBuilder
 
 class _$GproductListPageVars extends GproductListPageVars {
   @override
-  final _i2.GFilterCriteriaInfo filterCriteria;
+  final _i1.GFilterCriteriaInfo filterCriteria;
 
   factory _$GproductListPageVars(
           [void Function(GproductListPageVarsBuilder)? updates]) =>
@@ -192,10 +254,10 @@ class GproductListPageVarsBuilder
     implements Builder<GproductListPageVars, GproductListPageVarsBuilder> {
   _$GproductListPageVars? _$v;
 
-  _i2.GFilterCriteriaInfoBuilder? _filterCriteria;
-  _i2.GFilterCriteriaInfoBuilder get filterCriteria =>
-      _$this._filterCriteria ??= new _i2.GFilterCriteriaInfoBuilder();
-  set filterCriteria(_i2.GFilterCriteriaInfoBuilder? filterCriteria) =>
+  _i1.GFilterCriteriaInfoBuilder? _filterCriteria;
+  _i1.GFilterCriteriaInfoBuilder get filterCriteria =>
+      _$this._filterCriteria ??= new _i1.GFilterCriteriaInfoBuilder();
+  set filterCriteria(_i1.GFilterCriteriaInfoBuilder? filterCriteria) =>
       _$this._filterCriteria = filterCriteria;
 
   GproductListPageVarsBuilder();

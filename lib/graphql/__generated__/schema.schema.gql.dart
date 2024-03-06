@@ -152,6 +152,29 @@ abstract class GISortCriteria
       );
 }
 
+abstract class GNewSaleInputDto
+    implements Built<GNewSaleInputDto, GNewSaleInputDtoBuilder> {
+  GNewSaleInputDto._();
+
+  factory GNewSaleInputDto([void Function(GNewSaleInputDtoBuilder b) updates]) =
+      _$GNewSaleInputDto;
+
+  BuiltList<GSaleDetailInputDto> get saleDetails;
+  static Serializer<GNewSaleInputDto> get serializer =>
+      _$gNewSaleInputDtoSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GNewSaleInputDto.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GNewSaleInputDto? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GNewSaleInputDto.serializer,
+        json,
+      );
+}
+
 abstract class GProductInputDto
     implements Built<GProductInputDto, GProductInputDtoBuilder> {
   GProductInputDto._();
@@ -185,7 +208,10 @@ abstract class GSaleDetailInputDto
           [void Function(GSaleDetailInputDtoBuilder b) updates]) =
       _$GSaleDetailInputDto;
 
-  String get name;
+  double get price;
+  String get productId;
+  int get quantity;
+  String? get saleId;
   static Serializer<GSaleDetailInputDto> get serializer =>
       _$gSaleDetailInputDtoSerializer;
 

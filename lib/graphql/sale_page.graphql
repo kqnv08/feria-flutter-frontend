@@ -1,0 +1,16 @@
+query Sale($saleId:ID!){
+  sale(id:$saleId){
+    id
+    createdAt
+    total
+    details{
+      quantity
+      price
+      total
+      product{
+        id
+        name
+      }
+    }
+  }
+}

@@ -18,15 +18,27 @@ import 'package:graphql_test/graphql/__generated__/products.req.gql.dart'
     show GproductFindAllReq, GproductListPageReq;
 import 'package:graphql_test/graphql/__generated__/products.var.gql.dart'
     show GproductFindAllVars, GproductListPageVars;
+import 'package:graphql_test/graphql/__generated__/sale_page.data.gql.dart'
+    show
+        GSaleData,
+        GSaleData_sale,
+        GSaleData_sale_details,
+        GSaleData_sale_details_product;
+import 'package:graphql_test/graphql/__generated__/sale_page.req.gql.dart'
+    show GSaleReq;
+import 'package:graphql_test/graphql/__generated__/sale_page.var.gql.dart'
+    show GSaleVars;
 import 'package:graphql_test/graphql/__generated__/sales.data.gql.dart'
     show
+        GcreateSaleData,
+        GcreateSaleData_createSale,
         GsaleListPageData,
         GsaleListPageData_saleListPage,
         GsaleListPageData_saleListPage_data;
 import 'package:graphql_test/graphql/__generated__/sales.req.gql.dart'
-    show GsaleListPageReq;
+    show GcreateSaleReq, GsaleListPageReq;
 import 'package:graphql_test/graphql/__generated__/sales.var.gql.dart'
-    show GsaleListPageVars;
+    show GcreateSaleVars, GsaleListPageVars;
 import 'package:graphql_test/graphql/__generated__/schema.schema.gql.dart'
     show
         GBrandInputDto,
@@ -35,6 +47,7 @@ import 'package:graphql_test/graphql/__generated__/schema.schema.gql.dart'
         GFilterCriteriaInfo,
         GIFilterCriterion,
         GISortCriteria,
+        GNewSaleInputDto,
         GProductInputDto,
         GSaleDetailInputDto,
         GSaleInputDto,
@@ -52,10 +65,21 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GFilterCriteriaInfo,
   GIFilterCriterion,
   GISortCriteria,
+  GNewSaleInputDto,
   GProductInputDto,
+  GSaleData,
+  GSaleData_sale,
+  GSaleData_sale_details,
+  GSaleData_sale_details_product,
   GSaleDetailInputDto,
   GSaleInputDto,
+  GSaleReq,
+  GSaleVars,
   GUserInputDto,
+  GcreateSaleData,
+  GcreateSaleData_createSale,
+  GcreateSaleReq,
+  GcreateSaleVars,
   GproductFindAllData,
   GproductFindAllData_productFindAll,
   GproductFindAllReq,

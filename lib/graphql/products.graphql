@@ -1,9 +1,9 @@
-query productFindAll{
-  productFindAll{
+query productFindAll($productFilter:FilterCriteriaInfo){
+  productFindAll(criteria:$productFilter){
     id
     name
-    code
     price
+    code
   }
 }
 

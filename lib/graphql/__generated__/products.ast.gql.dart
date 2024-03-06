@@ -7,13 +7,28 @@ import 'package:gql/ast.dart' as _i1;
 const productFindAll = _i1.OperationDefinitionNode(
   type: _i1.OperationType.query,
   name: _i1.NameNode(value: 'productFindAll'),
-  variableDefinitions: [],
+  variableDefinitions: [
+    _i1.VariableDefinitionNode(
+      variable: _i1.VariableNode(name: _i1.NameNode(value: 'productFilter')),
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'FilterCriteriaInfo'),
+        isNonNull: false,
+      ),
+      defaultValue: _i1.DefaultValueNode(value: null),
+      directives: [],
+    )
+  ],
   directives: [],
   selectionSet: _i1.SelectionSetNode(selections: [
     _i1.FieldNode(
       name: _i1.NameNode(value: 'productFindAll'),
       alias: null,
-      arguments: [],
+      arguments: [
+        _i1.ArgumentNode(
+          name: _i1.NameNode(value: 'criteria'),
+          value: _i1.VariableNode(name: _i1.NameNode(value: 'productFilter')),
+        )
+      ],
       directives: [],
       selectionSet: _i1.SelectionSetNode(selections: [
         _i1.FieldNode(
@@ -31,14 +46,14 @@ const productFindAll = _i1.OperationDefinitionNode(
           selectionSet: null,
         ),
         _i1.FieldNode(
-          name: _i1.NameNode(value: 'code'),
+          name: _i1.NameNode(value: 'price'),
           alias: null,
           arguments: [],
           directives: [],
           selectionSet: null,
         ),
         _i1.FieldNode(
-          name: _i1.NameNode(value: 'price'),
+          name: _i1.NameNode(value: 'code'),
           alias: null,
           arguments: [],
           directives: [],

@@ -105,19 +105,19 @@ class _$GproductFindAllData_productFindAllSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.code;
-    if (value != null) {
-      result
-        ..add('code')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.price;
     if (value != null) {
       result
         ..add('price')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(double)));
+    }
+    value = object.code;
+    if (value != null) {
+      result
+        ..add('code')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
     }
     return result;
   }
@@ -146,13 +146,13 @@ class _$GproductFindAllData_productFindAllSerializer
           result.name = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
-        case 'code':
-          result.code = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
         case 'price':
           result.price = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double?;
+          break;
+        case 'code':
+          result.code = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -533,9 +533,9 @@ class _$GproductFindAllData_productFindAll
   @override
   final String name;
   @override
-  final String? code;
-  @override
   final double? price;
+  @override
+  final String? code;
 
   factory _$GproductFindAllData_productFindAll(
           [void Function(GproductFindAllData_productFindAllBuilder)?
@@ -547,8 +547,8 @@ class _$GproductFindAllData_productFindAll
       {required this.G__typename,
       this.id,
       required this.name,
-      this.code,
-      this.price})
+      this.price,
+      this.code})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename, r'GproductFindAllData_productFindAll', 'G__typename');
@@ -572,8 +572,8 @@ class _$GproductFindAllData_productFindAll
         G__typename == other.G__typename &&
         id == other.id &&
         name == other.name &&
-        code == other.code &&
-        price == other.price;
+        price == other.price &&
+        code == other.code;
   }
 
   @override
@@ -582,8 +582,8 @@ class _$GproductFindAllData_productFindAll
     _$hash = $jc(_$hash, G__typename.hashCode);
     _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, name.hashCode);
-    _$hash = $jc(_$hash, code.hashCode);
     _$hash = $jc(_$hash, price.hashCode);
+    _$hash = $jc(_$hash, code.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -594,8 +594,8 @@ class _$GproductFindAllData_productFindAll
           ..add('G__typename', G__typename)
           ..add('id', id)
           ..add('name', name)
-          ..add('code', code)
-          ..add('price', price))
+          ..add('price', price)
+          ..add('code', code))
         .toString();
   }
 }
@@ -618,13 +618,13 @@ class GproductFindAllData_productFindAllBuilder
   String? get name => _$this._name;
   set name(String? name) => _$this._name = name;
 
-  String? _code;
-  String? get code => _$this._code;
-  set code(String? code) => _$this._code = code;
-
   double? _price;
   double? get price => _$this._price;
   set price(double? price) => _$this._price = price;
+
+  String? _code;
+  String? get code => _$this._code;
+  set code(String? code) => _$this._code = code;
 
   GproductFindAllData_productFindAllBuilder() {
     GproductFindAllData_productFindAll._initializeBuilder(this);
@@ -636,8 +636,8 @@ class GproductFindAllData_productFindAllBuilder
       _G__typename = $v.G__typename;
       _id = $v.id;
       _name = $v.name;
-      _code = $v.code;
       _price = $v.price;
+      _code = $v.code;
       _$v = null;
     }
     return this;
@@ -666,8 +666,8 @@ class GproductFindAllData_productFindAllBuilder
             id: id,
             name: BuiltValueNullFieldError.checkNotNull(
                 name, r'GproductFindAllData_productFindAll', 'name'),
-            code: code,
-            price: price);
+            price: price,
+            code: code);
     replace(_$result);
     return _$result;
   }

@@ -55,8 +55,8 @@ abstract class GproductFindAllData_productFindAll
   String get G__typename;
   String? get id;
   String get name;
-  String? get code;
   double? get price;
+  String? get code;
   static Serializer<GproductFindAllData_productFindAll> get serializer =>
       _$gproductFindAllDataProductFindAllSerializer;
 

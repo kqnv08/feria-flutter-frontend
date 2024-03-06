@@ -512,14 +512,14 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
           name: _i1.NameNode(value: 'saleInputDto'),
           directives: [],
           type: _i1.NamedTypeNode(
-            name: _i1.NameNode(value: 'SaleInputDto'),
+            name: _i1.NameNode(value: 'NewSaleInputDto'),
             isNonNull: true,
           ),
           defaultValue: null,
         )
       ],
       type: _i1.NamedTypeNode(
-        name: _i1.NameNode(value: 'Sale'),
+        name: _i1.NameNode(value: 'GenericResult'),
         isNonNull: true,
       ),
     ),
@@ -852,6 +852,24 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
         isNonNull: true,
       ),
     ),
+  ],
+);
+const NewSaleInputDto = _i1.InputObjectTypeDefinitionNode(
+  name: _i1.NameNode(value: 'NewSaleInputDto'),
+  directives: [],
+  fields: [
+    _i1.InputValueDefinitionNode(
+      name: _i1.NameNode(value: 'saleDetails'),
+      directives: [],
+      type: _i1.ListTypeNode(
+        type: _i1.NamedTypeNode(
+          name: _i1.NameNode(value: 'SaleDetailInputDto'),
+          isNonNull: true,
+        ),
+        isNonNull: true,
+      ),
+      defaultValue: null,
+    )
   ],
 );
 const Product = _i1.ObjectTypeDefinitionNode(
@@ -1663,14 +1681,41 @@ const SaleDetailInputDto = _i1.InputObjectTypeDefinitionNode(
   directives: [],
   fields: [
     _i1.InputValueDefinitionNode(
-      name: _i1.NameNode(value: 'name'),
+      name: _i1.NameNode(value: 'price'),
       directives: [],
       type: _i1.NamedTypeNode(
-        name: _i1.NameNode(value: 'String'),
+        name: _i1.NameNode(value: 'Float'),
         isNonNull: true,
       ),
       defaultValue: null,
-    )
+    ),
+    _i1.InputValueDefinitionNode(
+      name: _i1.NameNode(value: 'productId'),
+      directives: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'ID'),
+        isNonNull: true,
+      ),
+      defaultValue: null,
+    ),
+    _i1.InputValueDefinitionNode(
+      name: _i1.NameNode(value: 'quantity'),
+      directives: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'Int'),
+        isNonNull: true,
+      ),
+      defaultValue: null,
+    ),
+    _i1.InputValueDefinitionNode(
+      name: _i1.NameNode(value: 'saleId'),
+      directives: [],
+      type: _i1.NamedTypeNode(
+        name: _i1.NameNode(value: 'ID'),
+        isNonNull: false,
+      ),
+      defaultValue: null,
+    ),
   ],
 );
 const SaleDetailListPageInfoResponse = _i1.ObjectTypeDefinitionNode(
@@ -2059,6 +2104,7 @@ const document = _i1.DocumentNode(definitions: [
   IFilterCriterion,
   ISortCriteria,
   Mutation,
+  NewSaleInputDto,
   Product,
   ProductInputDto,
   ProductListPageInfoResponse,

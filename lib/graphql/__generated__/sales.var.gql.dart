@@ -33,3 +33,26 @@ abstract class GsaleListPageVars
         json,
       );
 }
+
+abstract class GcreateSaleVars
+    implements Built<GcreateSaleVars, GcreateSaleVarsBuilder> {
+  GcreateSaleVars._();
+
+  factory GcreateSaleVars([void Function(GcreateSaleVarsBuilder b) updates]) =
+      _$GcreateSaleVars;
+
+  _i1.GNewSaleInputDto get saleInputDto;
+  static Serializer<GcreateSaleVars> get serializer =>
+      _$gcreateSaleVarsSerializer;
+
+  Map<String, dynamic> toJson() => (_i2.serializers.serializeWith(
+        GcreateSaleVars.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GcreateSaleVars? fromJson(Map<String, dynamic> json) =>
+      _i2.serializers.deserializeWith(
+        GcreateSaleVars.serializer,
+        json,
+      );
+}

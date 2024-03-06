@@ -4,7 +4,12 @@ import 'package:go_router/go_router.dart';
 class SharedScaffold extends StatefulWidget {
   final Widget body;
   final String title;
-  const SharedScaffold({super.key, required this.body,required this.title});
+  final FloatingActionButton? floatingActionButton;
+  const SharedScaffold(
+      {super.key,
+      required this.body,
+      required this.title,
+      this.floatingActionButton});
 
   @override
   State<StatefulWidget> createState() => SharedScaffoldState();
@@ -48,11 +53,7 @@ class SharedScaffoldState extends State<SharedScaffold> {
         title: Text(widget.title),
       ),
       body: widget.body,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: widget.floatingActionButton,
     );
   }
 }

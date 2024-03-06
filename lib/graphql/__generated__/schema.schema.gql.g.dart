@@ -16,6 +16,8 @@ Serializer<GIFilterCriterion> _$gIFilterCriterionSerializer =
     new _$GIFilterCriterionSerializer();
 Serializer<GISortCriteria> _$gISortCriteriaSerializer =
     new _$GISortCriteriaSerializer();
+Serializer<GNewSaleInputDto> _$gNewSaleInputDtoSerializer =
+    new _$GNewSaleInputDtoSerializer();
 Serializer<GProductInputDto> _$gProductInputDtoSerializer =
     new _$GProductInputDtoSerializer();
 Serializer<GSaleDetailInputDto> _$gSaleDetailInputDtoSerializer =
@@ -352,6 +354,51 @@ class _$GISortCriteriaSerializer
   }
 }
 
+class _$GNewSaleInputDtoSerializer
+    implements StructuredSerializer<GNewSaleInputDto> {
+  @override
+  final Iterable<Type> types = const [GNewSaleInputDto, _$GNewSaleInputDto];
+  @override
+  final String wireName = 'GNewSaleInputDto';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, GNewSaleInputDto object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'saleDetails',
+      serializers.serialize(object.saleDetails,
+          specifiedType: const FullType(
+              BuiltList, const [const FullType(GSaleDetailInputDto)])),
+    ];
+
+    return result;
+  }
+
+  @override
+  GNewSaleInputDto deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new GNewSaleInputDtoBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current! as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'saleDetails':
+          result.saleDetails.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(GSaleDetailInputDto)]))!
+              as BuiltList<Object?>);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
 class _$GProductInputDtoSerializer
     implements StructuredSerializer<GProductInputDto> {
   @override
@@ -430,10 +477,24 @@ class _$GSaleDetailInputDtoSerializer
       Serializers serializers, GSaleDetailInputDto object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'name',
-      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'price',
+      serializers.serialize(object.price,
+          specifiedType: const FullType(double)),
+      'productId',
+      serializers.serialize(object.productId,
+          specifiedType: const FullType(String)),
+      'quantity',
+      serializers.serialize(object.quantity,
+          specifiedType: const FullType(int)),
     ];
-
+    Object? value;
+    value = object.saleId;
+    if (value != null) {
+      result
+        ..add('saleId')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -449,9 +510,21 @@ class _$GSaleDetailInputDtoSerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'name':
-          result.name = serializers.deserialize(value,
+        case 'price':
+          result.price = serializers.deserialize(value,
+              specifiedType: const FullType(double))! as double;
+          break;
+        case 'productId':
+          result.productId = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
+          break;
+        case 'quantity':
+          result.quantity = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
+          break;
+        case 'saleId':
+          result.saleId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -1255,6 +1328,105 @@ class GISortCriteriaBuilder
   }
 }
 
+class _$GNewSaleInputDto extends GNewSaleInputDto {
+  @override
+  final BuiltList<GSaleDetailInputDto> saleDetails;
+
+  factory _$GNewSaleInputDto(
+          [void Function(GNewSaleInputDtoBuilder)? updates]) =>
+      (new GNewSaleInputDtoBuilder()..update(updates))._build();
+
+  _$GNewSaleInputDto._({required this.saleDetails}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        saleDetails, r'GNewSaleInputDto', 'saleDetails');
+  }
+
+  @override
+  GNewSaleInputDto rebuild(void Function(GNewSaleInputDtoBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GNewSaleInputDtoBuilder toBuilder() =>
+      new GNewSaleInputDtoBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GNewSaleInputDto && saleDetails == other.saleDetails;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, saleDetails.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'GNewSaleInputDto')
+          ..add('saleDetails', saleDetails))
+        .toString();
+  }
+}
+
+class GNewSaleInputDtoBuilder
+    implements Builder<GNewSaleInputDto, GNewSaleInputDtoBuilder> {
+  _$GNewSaleInputDto? _$v;
+
+  ListBuilder<GSaleDetailInputDto>? _saleDetails;
+  ListBuilder<GSaleDetailInputDto> get saleDetails =>
+      _$this._saleDetails ??= new ListBuilder<GSaleDetailInputDto>();
+  set saleDetails(ListBuilder<GSaleDetailInputDto>? saleDetails) =>
+      _$this._saleDetails = saleDetails;
+
+  GNewSaleInputDtoBuilder();
+
+  GNewSaleInputDtoBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _saleDetails = $v.saleDetails.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(GNewSaleInputDto other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$GNewSaleInputDto;
+  }
+
+  @override
+  void update(void Function(GNewSaleInputDtoBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  GNewSaleInputDto build() => _build();
+
+  _$GNewSaleInputDto _build() {
+    _$GNewSaleInputDto _$result;
+    try {
+      _$result =
+          _$v ?? new _$GNewSaleInputDto._(saleDetails: saleDetails.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'saleDetails';
+        saleDetails.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'GNewSaleInputDto', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$GProductInputDto extends GProductInputDto {
   @override
   final bool? enabled;
@@ -1366,14 +1538,30 @@ class GProductInputDtoBuilder
 
 class _$GSaleDetailInputDto extends GSaleDetailInputDto {
   @override
-  final String name;
+  final double price;
+  @override
+  final String productId;
+  @override
+  final int quantity;
+  @override
+  final String? saleId;
 
   factory _$GSaleDetailInputDto(
           [void Function(GSaleDetailInputDtoBuilder)? updates]) =>
       (new GSaleDetailInputDtoBuilder()..update(updates))._build();
 
-  _$GSaleDetailInputDto._({required this.name}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(name, r'GSaleDetailInputDto', 'name');
+  _$GSaleDetailInputDto._(
+      {required this.price,
+      required this.productId,
+      required this.quantity,
+      this.saleId})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        price, r'GSaleDetailInputDto', 'price');
+    BuiltValueNullFieldError.checkNotNull(
+        productId, r'GSaleDetailInputDto', 'productId');
+    BuiltValueNullFieldError.checkNotNull(
+        quantity, r'GSaleDetailInputDto', 'quantity');
   }
 
   @override
@@ -1388,13 +1576,20 @@ class _$GSaleDetailInputDto extends GSaleDetailInputDto {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GSaleDetailInputDto && name == other.name;
+    return other is GSaleDetailInputDto &&
+        price == other.price &&
+        productId == other.productId &&
+        quantity == other.quantity &&
+        saleId == other.saleId;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, price.hashCode);
+    _$hash = $jc(_$hash, productId.hashCode);
+    _$hash = $jc(_$hash, quantity.hashCode);
+    _$hash = $jc(_$hash, saleId.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -1402,7 +1597,10 @@ class _$GSaleDetailInputDto extends GSaleDetailInputDto {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'GSaleDetailInputDto')
-          ..add('name', name))
+          ..add('price', price)
+          ..add('productId', productId)
+          ..add('quantity', quantity)
+          ..add('saleId', saleId))
         .toString();
   }
 }
@@ -1411,16 +1609,31 @@ class GSaleDetailInputDtoBuilder
     implements Builder<GSaleDetailInputDto, GSaleDetailInputDtoBuilder> {
   _$GSaleDetailInputDto? _$v;
 
-  String? _name;
-  String? get name => _$this._name;
-  set name(String? name) => _$this._name = name;
+  double? _price;
+  double? get price => _$this._price;
+  set price(double? price) => _$this._price = price;
+
+  String? _productId;
+  String? get productId => _$this._productId;
+  set productId(String? productId) => _$this._productId = productId;
+
+  int? _quantity;
+  int? get quantity => _$this._quantity;
+  set quantity(int? quantity) => _$this._quantity = quantity;
+
+  String? _saleId;
+  String? get saleId => _$this._saleId;
+  set saleId(String? saleId) => _$this._saleId = saleId;
 
   GSaleDetailInputDtoBuilder();
 
   GSaleDetailInputDtoBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _name = $v.name;
+      _price = $v.price;
+      _productId = $v.productId;
+      _quantity = $v.quantity;
+      _saleId = $v.saleId;
       _$v = null;
     }
     return this;
@@ -1443,8 +1656,13 @@ class GSaleDetailInputDtoBuilder
   _$GSaleDetailInputDto _build() {
     final _$result = _$v ??
         new _$GSaleDetailInputDto._(
-            name: BuiltValueNullFieldError.checkNotNull(
-                name, r'GSaleDetailInputDto', 'name'));
+            price: BuiltValueNullFieldError.checkNotNull(
+                price, r'GSaleDetailInputDto', 'price'),
+            productId: BuiltValueNullFieldError.checkNotNull(
+                productId, r'GSaleDetailInputDto', 'productId'),
+            quantity: BuiltValueNullFieldError.checkNotNull(
+                quantity, r'GSaleDetailInputDto', 'quantity'),
+            saleId: saleId);
     replace(_$result);
     return _$result;
   }

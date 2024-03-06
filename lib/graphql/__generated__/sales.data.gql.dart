@@ -110,3 +110,61 @@ abstract class GsaleListPageData_saleListPage_data
         json,
       );
 }
+
+abstract class GcreateSaleData
+    implements Built<GcreateSaleData, GcreateSaleDataBuilder> {
+  GcreateSaleData._();
+
+  factory GcreateSaleData([void Function(GcreateSaleDataBuilder b) updates]) =
+      _$GcreateSaleData;
+
+  static void _initializeBuilder(GcreateSaleDataBuilder b) =>
+      b..G__typename = 'Mutation';
+
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  GcreateSaleData_createSale get createSale;
+  static Serializer<GcreateSaleData> get serializer =>
+      _$gcreateSaleDataSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GcreateSaleData.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GcreateSaleData? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GcreateSaleData.serializer,
+        json,
+      );
+}
+
+abstract class GcreateSaleData_createSale
+    implements
+        Built<GcreateSaleData_createSale, GcreateSaleData_createSaleBuilder> {
+  GcreateSaleData_createSale._();
+
+  factory GcreateSaleData_createSale(
+          [void Function(GcreateSaleData_createSaleBuilder b) updates]) =
+      _$GcreateSaleData_createSale;
+
+  static void _initializeBuilder(GcreateSaleData_createSaleBuilder b) =>
+      b..G__typename = 'GenericResult';
+
+  @BuiltValueField(wireName: '__typename')
+  String get G__typename;
+  bool get success;
+  static Serializer<GcreateSaleData_createSale> get serializer =>
+      _$gcreateSaleDataCreateSaleSerializer;
+
+  Map<String, dynamic> toJson() => (_i1.serializers.serializeWith(
+        GcreateSaleData_createSale.serializer,
+        this,
+      ) as Map<String, dynamic>);
+
+  static GcreateSaleData_createSale? fromJson(Map<String, dynamic> json) =>
+      _i1.serializers.deserializeWith(
+        GcreateSaleData_createSale.serializer,
+        json,
+      );
+}
