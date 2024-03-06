@@ -635,7 +635,7 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
           name: _i1.NameNode(value: 'id'),
           directives: [],
           type: _i1.NamedTypeNode(
-            name: _i1.NameNode(value: 'Int'),
+            name: _i1.NameNode(value: 'ID'),
             isNonNull: true,
           ),
           defaultValue: null,
@@ -776,7 +776,7 @@ const Mutation = _i1.ObjectTypeDefinitionNode(
           name: _i1.NameNode(value: 'id'),
           directives: [],
           type: _i1.NamedTypeNode(
-            name: _i1.NameNode(value: 'Int'),
+            name: _i1.NameNode(value: 'ID'),
             isNonNull: true,
           ),
           defaultValue: null,
@@ -1259,7 +1259,7 @@ const Query = _i1.ObjectTypeDefinitionNode(
           name: _i1.NameNode(value: 'id'),
           directives: [],
           type: _i1.NamedTypeNode(
-            name: _i1.NameNode(value: 'Int'),
+            name: _i1.NameNode(value: 'ID'),
             isNonNull: true,
           ),
           defaultValue: null,

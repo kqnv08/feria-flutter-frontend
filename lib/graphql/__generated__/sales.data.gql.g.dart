@@ -328,7 +328,14 @@ class _$GcreateSaleData_createSaleSerializer
       serializers.serialize(object.success,
           specifiedType: const FullType(bool)),
     ];
-
+    Object? value;
+    value = object.successData;
+    if (value != null) {
+      result
+        ..add('successData')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -351,6 +358,10 @@ class _$GcreateSaleData_createSaleSerializer
         case 'success':
           result.success = serializers.deserialize(value,
               specifiedType: const FullType(bool))! as bool;
+          break;
+        case 'successData':
+          result.successData = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -934,13 +945,15 @@ class _$GcreateSaleData_createSale extends GcreateSaleData_createSale {
   final String G__typename;
   @override
   final bool success;
+  @override
+  final String? successData;
 
   factory _$GcreateSaleData_createSale(
           [void Function(GcreateSaleData_createSaleBuilder)? updates]) =>
       (new GcreateSaleData_createSaleBuilder()..update(updates))._build();
 
   _$GcreateSaleData_createSale._(
-      {required this.G__typename, required this.success})
+      {required this.G__typename, required this.success, this.successData})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(
         G__typename, r'GcreateSaleData_createSale', 'G__typename');
@@ -962,7 +975,8 @@ class _$GcreateSaleData_createSale extends GcreateSaleData_createSale {
     if (identical(other, this)) return true;
     return other is GcreateSaleData_createSale &&
         G__typename == other.G__typename &&
-        success == other.success;
+        success == other.success &&
+        successData == other.successData;
   }
 
   @override
@@ -970,6 +984,7 @@ class _$GcreateSaleData_createSale extends GcreateSaleData_createSale {
     var _$hash = 0;
     _$hash = $jc(_$hash, G__typename.hashCode);
     _$hash = $jc(_$hash, success.hashCode);
+    _$hash = $jc(_$hash, successData.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -978,7 +993,8 @@ class _$GcreateSaleData_createSale extends GcreateSaleData_createSale {
   String toString() {
     return (newBuiltValueToStringHelper(r'GcreateSaleData_createSale')
           ..add('G__typename', G__typename)
-          ..add('success', success))
+          ..add('success', success)
+          ..add('successData', successData))
         .toString();
   }
 }
@@ -996,6 +1012,10 @@ class GcreateSaleData_createSaleBuilder
   bool? get success => _$this._success;
   set success(bool? success) => _$this._success = success;
 
+  String? _successData;
+  String? get successData => _$this._successData;
+  set successData(String? successData) => _$this._successData = successData;
+
   GcreateSaleData_createSaleBuilder() {
     GcreateSaleData_createSale._initializeBuilder(this);
   }
@@ -1005,6 +1025,7 @@ class GcreateSaleData_createSaleBuilder
     if ($v != null) {
       _G__typename = $v.G__typename;
       _success = $v.success;
+      _successData = $v.successData;
       _$v = null;
     }
     return this;
@@ -1030,7 +1051,8 @@ class GcreateSaleData_createSaleBuilder
             G__typename: BuiltValueNullFieldError.checkNotNull(
                 G__typename, r'GcreateSaleData_createSale', 'G__typename'),
             success: BuiltValueNullFieldError.checkNotNull(
-                success, r'GcreateSaleData_createSale', 'success'));
+                success, r'GcreateSaleData_createSale', 'success'),
+            successData: successData);
     replace(_$result);
     return _$result;
   }

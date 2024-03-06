@@ -1,6 +1,7 @@
 import 'package:ferry/ferry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_test/components/shared_scaffold.dart';
@@ -21,7 +22,6 @@ class Product {
       required this.quantity,
       this.id});
 }
-
 
 class SaleFormPage extends StatefulWidget {
   const SaleFormPage({super.key});
@@ -239,11 +239,20 @@ class MyFormState extends State<SaleFormPage> {
     );
   }
 
+  void _showToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 3,
+      backgroundColor: Colors.grey,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  }
+
   // Implementa la lógica de guardado aquí
   _guardarCambios() async {
-    print(productList.first.id);
-    print(productList.first.quantity);
-    print(productList.first.price);
     final saleReq = GcreateSaleReq(
       (b) => b
         ..vars
@@ -261,6 +270,9 @@ class MyFormState extends State<SaleFormPage> {
           saleReq,
         )
         .first;
+    final successData = queryResult.data?.createSale.successData;
+    _showToast("Se guardo con exito la venta N°$successData");
+
     Navigator.of(context).pop();
   }
 }

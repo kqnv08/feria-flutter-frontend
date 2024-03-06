@@ -82,13 +82,13 @@ type Mutation {
   removeBrand(id: Int!): Brand!
   removeCategory(id: Int!): Category!
   removeProduct(id: Int!): Product!
-  removeSale(id: Int!): Sale!
+  removeSale(id: ID!): Sale!
   removeSaleDetail(id: Int!): SaleDetail!
   removeUser(id: Int!): User!
   updateBrand(brandInputDto: BrandInputDto!, id: Int!): Brand!
   updateCategory(categoryInputDto: CategoryInputDto!, id: Int!): Category!
   updateProduct(id: Int!, productInputDto: ProductInputDto!): Product!
-  updateSale(id: Int!, saleInputDto: SaleInputDto!): Sale!
+  updateSale(id: ID!, saleInputDto: SaleInputDto!): Sale!
   updateSaleDetail(
     id: Int!
     saleDetailInputDto: SaleDetailInputDto!
@@ -142,7 +142,7 @@ type Query {
   productListPage(
     productCriteria: FilterCriteriaInfo
   ): ProductListPageInfoResponse!
-  sale(id: Int!): Sale!
+  sale(id: ID!): Sale!
   saleDetail(id: Int!): SaleDetail!
   saleDetailFindAll(criteria: FilterCriteriaInfo): [SaleDetail!]!
   saleDetailListPage(

@@ -154,6 +154,7 @@ abstract class GcreateSaleData_createSale
   @BuiltValueField(wireName: '__typename')
   String get G__typename;
   bool get success;
+  String? get successData;
   static Serializer<GcreateSaleData_createSale> get serializer =>
       _$gcreateSaleDataCreateSaleSerializer;
 

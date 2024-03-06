@@ -24,7 +24,7 @@ Future<Client> initClient() async {
     )
   });
 
-  final link = HttpLink('http://localhost:5000/graphql');
+  final link = HttpLink('https://stock-system-backend.onrender.com/graphql');
 
   final client = Client(
     link: link,

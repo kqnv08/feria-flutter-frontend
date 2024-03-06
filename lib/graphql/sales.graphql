@@ -16,5 +16,6 @@ query saleListPage($saleCriteria:FilterCriteriaInfo!){
 mutation createSale($saleInputDto:NewSaleInputDto!){
   createSale(saleInputDto:$saleInputDto){
     success
+    successData
   }
 }
