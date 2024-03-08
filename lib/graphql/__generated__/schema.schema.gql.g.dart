@@ -409,24 +409,28 @@ class _$GProductInputDtoSerializer
   @override
   Iterable<Object?> serialize(Serializers serializers, GProductInputDto object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object?>[
-      'key',
-      serializers.serialize(object.key, specifiedType: const FullType(String)),
-    ];
+    final result = <Object?>[];
     Object? value;
-    value = object.enabled;
+    value = object.code;
     if (value != null) {
       result
-        ..add('enabled')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
-    value = object.value;
-    if (value != null) {
-      result
-        ..add('value')
+        ..add('code')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
+    }
+    value = object.name;
+    if (value != null) {
+      result
+        ..add('name')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.price;
+    if (value != null) {
+      result
+        ..add('price')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
     }
     return result;
   }
@@ -443,17 +447,17 @@ class _$GProductInputDtoSerializer
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'enabled':
-          result.enabled = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool?;
-          break;
-        case 'key':
-          result.key = serializers.deserialize(value,
-              specifiedType: const FullType(String))! as String;
-          break;
-        case 'value':
-          result.value = serializers.deserialize(value,
+        case 'code':
+          result.code = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
+          break;
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'price':
+          result.price = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
           break;
       }
     }
@@ -1429,20 +1433,17 @@ class GNewSaleInputDtoBuilder
 
 class _$GProductInputDto extends GProductInputDto {
   @override
-  final bool? enabled;
+  final String? code;
   @override
-  final String key;
+  final String? name;
   @override
-  final String? value;
+  final double? price;
 
   factory _$GProductInputDto(
           [void Function(GProductInputDtoBuilder)? updates]) =>
       (new GProductInputDtoBuilder()..update(updates))._build();
 
-  _$GProductInputDto._({this.enabled, required this.key, this.value})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(key, r'GProductInputDto', 'key');
-  }
+  _$GProductInputDto._({this.code, this.name, this.price}) : super._();
 
   @override
   GProductInputDto rebuild(void Function(GProductInputDtoBuilder) updates) =>
@@ -1456,17 +1457,17 @@ class _$GProductInputDto extends GProductInputDto {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is GProductInputDto &&
-        enabled == other.enabled &&
-        key == other.key &&
-        value == other.value;
+        code == other.code &&
+        name == other.name &&
+        price == other.price;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, enabled.hashCode);
-    _$hash = $jc(_$hash, key.hashCode);
-    _$hash = $jc(_$hash, value.hashCode);
+    _$hash = $jc(_$hash, code.hashCode);
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, price.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -1474,9 +1475,9 @@ class _$GProductInputDto extends GProductInputDto {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'GProductInputDto')
-          ..add('enabled', enabled)
-          ..add('key', key)
-          ..add('value', value))
+          ..add('code', code)
+          ..add('name', name)
+          ..add('price', price))
         .toString();
   }
 }
@@ -1485,26 +1486,26 @@ class GProductInputDtoBuilder
     implements Builder<GProductInputDto, GProductInputDtoBuilder> {
   _$GProductInputDto? _$v;
 
-  bool? _enabled;
-  bool? get enabled => _$this._enabled;
-  set enabled(bool? enabled) => _$this._enabled = enabled;
+  String? _code;
+  String? get code => _$this._code;
+  set code(String? code) => _$this._code = code;
 
-  String? _key;
-  String? get key => _$this._key;
-  set key(String? key) => _$this._key = key;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
-  String? _value;
-  String? get value => _$this._value;
-  set value(String? value) => _$this._value = value;
+  double? _price;
+  double? get price => _$this._price;
+  set price(double? price) => _$this._price = price;
 
   GProductInputDtoBuilder();
 
   GProductInputDtoBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _enabled = $v.enabled;
-      _key = $v.key;
-      _value = $v.value;
+      _code = $v.code;
+      _name = $v.name;
+      _price = $v.price;
       _$v = null;
     }
     return this;
@@ -1525,12 +1526,8 @@ class GProductInputDtoBuilder
   GProductInputDto build() => _build();
 
   _$GProductInputDto _build() {
-    final _$result = _$v ??
-        new _$GProductInputDto._(
-            enabled: enabled,
-            key: BuiltValueNullFieldError.checkNotNull(
-                key, r'GProductInputDto', 'key'),
-            value: value);
+    final _$result =
+        _$v ?? new _$GProductInputDto._(code: code, name: name, price: price);
     replace(_$result);
     return _$result;
   }

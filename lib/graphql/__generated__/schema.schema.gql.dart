@@ -182,9 +182,9 @@ abstract class GProductInputDto
   factory GProductInputDto([void Function(GProductInputDtoBuilder b) updates]) =
       _$GProductInputDto;
 
-  bool? get enabled;
-  String get key;
-  String? get value;
+  String? get code;
+  String? get name;
+  double? get price;
   static Serializer<GProductInputDto> get serializer =>
       _$gProductInputDtoSerializer;
 

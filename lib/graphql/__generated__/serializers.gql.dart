@@ -18,6 +18,16 @@ import 'package:graphql_test/graphql/__generated__/products.req.gql.dart'
     show GproductFindAllReq, GproductListPageReq;
 import 'package:graphql_test/graphql/__generated__/products.var.gql.dart'
     show GproductFindAllVars, GproductListPageVars;
+import 'package:graphql_test/graphql/__generated__/products_page.data.gql.dart'
+    show
+        GCreateProductData,
+        GCreateProductData_createProduct,
+        GUpdateProductData,
+        GUpdateProductData_updateProduct;
+import 'package:graphql_test/graphql/__generated__/products_page.req.gql.dart'
+    show GCreateProductReq, GUpdateProductReq;
+import 'package:graphql_test/graphql/__generated__/products_page.var.gql.dart'
+    show GCreateProductVars, GUpdateProductVars;
 import 'package:graphql_test/graphql/__generated__/sale_page.data.gql.dart'
     show
         GSaleData,
@@ -61,6 +71,10 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
 @SerializersFor([
   GBrandInputDto,
   GCategoryInputDto,
+  GCreateProductData,
+  GCreateProductData_createProduct,
+  GCreateProductReq,
+  GCreateProductVars,
   GDateTime,
   GFilterCriteriaInfo,
   GIFilterCriterion,
@@ -75,6 +89,10 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GSaleInputDto,
   GSaleReq,
   GSaleVars,
+  GUpdateProductData,
+  GUpdateProductData_updateProduct,
+  GUpdateProductReq,
+  GUpdateProductVars,
   GUserInputDto,
   GcreateSaleData,
   GcreateSaleData_createSale,

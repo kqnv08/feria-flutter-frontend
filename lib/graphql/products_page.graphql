@@ -1,0 +1,11 @@
+mutation CreateProduct($productInputDto:ProductInputDto!){
+  createProduct(productInputDto:$productInputDto){
+    id
+  }
+}
+
+mutation UpdateProduct($id:ID!,$productInputDto:ProductInputDto!){
+  updateProduct(id:$id,productInputDto:$productInputDto){
+    id
+  }
+}
