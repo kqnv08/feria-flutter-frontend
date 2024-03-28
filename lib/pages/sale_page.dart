@@ -1,13 +1,9 @@
 import 'package:ferry/ferry.dart';
 import 'package:ferry_flutter/ferry_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:graphql_test/components/shared_scaffold.dart';
 import 'package:graphql_test/graphql/__generated__/sale_page.req.gql.dart';
-import 'package:graphql_test/graphql/__generated__/schema.schema.gql.dart';
-import 'package:graphql_test/graphql/graphql_client.dart';
 import 'package:intl/intl.dart';
 
 class Product {
@@ -31,6 +27,8 @@ class SalePage extends StatefulWidget {
 }
 
 class MyFormState extends State<SalePage> {
+  String? _saleId;
+
   List<Product> productList = [];
   double total = 0.0;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -38,9 +36,15 @@ class MyFormState extends State<SalePage> {
   TextEditingController searchController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    _saleId = widget.saleId;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final saleReq = GSaleReq(
-      (b) => b..vars.saleId = "1",
+      (b) => b..vars.saleId = _saleId,
     );
     return SharedScaffold(
       title: "Detalle de Venta",

@@ -1,7 +1,6 @@
 import 'package:ferry/ferry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphql_test/components/shared_scaffold.dart';
@@ -33,6 +32,7 @@ class SaleFormPage extends StatefulWidget {
 class MyFormState extends State<SaleFormPage> {
   List<Product> productList = [];
   double total = 0.0;
+  DateTime _selectedDate = DateTime.now();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final client = GetIt.I<Client>();
   TextEditingController searchController = TextEditingController();
@@ -47,6 +47,33 @@ class MyFormState extends State<SaleFormPage> {
           key: _formKey,
           child: Column(
             children: [
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Fecha de Venta',
+                ),
+                readOnly:
+                    true, // Para evitar la edición directa del campo de texto
+                controller: TextEditingController(
+                  // Mostrar la fecha seleccionada en el campo de texto
+                  text: DateFormat('dd-MM-yyyy').format(_selectedDate),
+                ),
+                onTap: () async {
+                  // Mostrar el selector de fecha al hacer clic en el campo de texto
+                  final selectedDate = await showDatePicker(
+                    context: context,
+                    initialDate: _selectedDate,
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2100),
+                  );
+                  if (selectedDate != null) {
+                    setState(() {
+                      _selectedDate =
+                          selectedDate; // Actualizar la fecha seleccionada
+                    });
+                  }
+                },
+              ),
+              const SizedBox(height: 16),
               TypeAheadField(
                 emptyBuilder: (BuildContext context) {
                   return const Padding(
@@ -74,7 +101,7 @@ class MyFormState extends State<SaleFormPage> {
                           ..type = "like"
                           ..value = search),
                       ])
-                      ..fetchPolicy = FetchPolicy.CacheFirst,
+                      ..fetchPolicy = FetchPolicy.NetworkOnly,
                   );
 
                   final queryResult = await client
@@ -98,7 +125,7 @@ class MyFormState extends State<SaleFormPage> {
                 },
                 itemBuilder: (context, product) {
                   return ListTile(
-                    title: Text(product.name),
+                    title: Text(product.id + " -- " + product.name),
                     subtitle: Text((product.code ?? "---") +
                         " - " +
                         NumberFormat.currency(symbol: "\$")
@@ -250,6 +277,7 @@ class MyFormState extends State<SaleFormPage> {
 
   // Implementa la lógica de guardado aquí
   _guardarCambios() async {
+    print(_selectedDate);
     final saleReq = GcreateSaleReq(
       (b) => b
         ..vars

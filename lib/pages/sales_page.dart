@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_test/components/shared_scaffold.dart';
 import 'package:graphql_test/graphql/__generated__/sales.req.gql.dart';
+import 'package:graphql_test/utils/format_currency.dart';
 import 'package:intl/intl.dart';
 
 int _currentPage = 1;
@@ -143,6 +144,12 @@ class SaleListWidgetState extends State<SaleListWidget> {
                           ),
                           onSort: _handleSort,
                         ),
+                        DataColumn(
+                          label: Text(
+                            "Acciones",
+                            style: GoogleFonts.lobster(),
+                          ),
+                        ),
                       ],
                       source: MyData(data: productListPage, context: context)));
             },
@@ -161,12 +168,20 @@ class MyData extends DataTableSource {
     final row = data.data[pageIndex];
     final formatedDate = DateFormat('dd-MM-yyyy HH:mm:ss')
         .format(DateTime.parse(row.createdAt.value));
-
-    return DataRow(onLongPress: () => context.go("/sale/$row.id"), cells: [
+    final rowId = row.id;
+    return DataRow(cells: [
       DataCell(Text(row.id)),
       DataCell(Text(row.createdAt == null ? "---" : formatedDate)),
       DataCell(Text(row.name ?? "---")),
-      DataCell(Text(row.total?.toString() ?? "0")),
+      DataCell(Text(row.total != 0 ? formatCurrency(row.total) : "0")),
+      DataCell(Row(
+        children: [
+          IconButton(
+            icon: const Icon(Icons.details),
+            onPressed: () async => {context.go("/sale/$rowId")},
+          ),
+        ],
+      ))
     ]);
   }
 

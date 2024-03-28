@@ -33,7 +33,7 @@ class SharedScaffoldState extends State<SharedScaffold> {
             ListTile(
               onTap: () => context.go('/products'),
               leading: const Icon(Icons.ad_units_outlined),
-              title: const Text("Articulos"),
+              title: const Text("Productos"),
             ),
             ListTile(
               onTap: () => context.go('/sales'),

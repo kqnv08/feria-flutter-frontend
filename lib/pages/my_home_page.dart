@@ -11,7 +11,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return SharedScaffold(
@@ -37,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: () {
                     context.go("/products");
                   },
-                  child: Text('Empezar'),
+                  child: const Text('Empezar'),
                 ),
               ],
             ),

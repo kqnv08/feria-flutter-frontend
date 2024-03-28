@@ -1,12 +1,15 @@
 import 'package:ferry/ferry.dart';
 import 'package:ferry_flutter/ferry_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_test/components/shared_scaffold.dart';
 import 'package:graphql_test/graphql/__generated__/products.req.gql.dart';
 import 'package:flutter/services.dart';
 import 'package:graphql_test/graphql/__generated__/products_page.req.gql.dart';
+import 'package:graphql_test/graphql/__generated__/schema.schema.gql.dart';
+import 'package:graphql_test/utils/format_currency.dart';
 import 'package:graphql_test/utils/show_toast.dart';
 
 int _currentPage = 1;
@@ -24,7 +27,7 @@ class MyDataTableWidget extends StatefulWidget {
 class _MyDataTableWidgetState extends State<MyDataTableWidget> {
   final client = GetIt.I<Client>();
   int _sortColumIndex = 0;
-  bool _orderSort = true;
+  bool _orderSort = false;
   String _sortColumName = "id";
 
   final productsReq = GproductListPageReq(
@@ -75,6 +78,8 @@ class _MyDataTableWidgetState extends State<MyDataTableWidget> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController searchController = TextEditingController();
+
     return SharedScaffold(
       title: "Productos",
       body: Center(
@@ -89,65 +94,112 @@ class _MyDataTableWidgetState extends State<MyDataTableWidget> {
             }
 
             final productListPage = response!.data?.productListPage;
+            TextEditingController controller = TextEditingController();
 
-            return SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: PaginatedDataTable(
-                    // controller: ScrollController(onAttach: (position) => print(position),),
-                    showFirstLastButtons: true,
-                    sortColumnIndex: _sortColumIndex,
-                    sortAscending: _orderSort,
-                    rowsPerPage: _pageSize,
-                    onPageChanged: (newPage) {
-                      _newPageIndex = newPage;
-                      _currentPage = (newPage / _pageSize + 1).toInt();
-                      refetchProductListPage();
-                    },
-                    onRowsPerPageChanged: (value) {
-                      _pageSize = value ?? 10;
-                      // _currentPage = 1;
-                      refetchProductListPage();
-                    },
-                    columns: [
-                      DataColumn(
-                        label: Text(
-                          "ID",
-                          style: GoogleFonts.lobster(),
+            return Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: controller,
+                        decoration: InputDecoration(
+                          hintText: 'Ingrese su búsqueda',
                         ),
-                        onSort: _handleSort,
                       ),
-                      DataColumn(
-                        label: Text(
-                          "Codigo",
-                          style: GoogleFonts.lobster(),
-                        ),
-                        onSort: _handleSort,
-                      ),
-                      DataColumn(
-                        label: Text(
-                          "Nombre",
-                          style: GoogleFonts.lobster(),
-                        ),
-                        onSort: _handleSort,
-                      ),
-                      DataColumn(
-                        label: Text(
-                          "Precio",
-                          style: GoogleFonts.lobster(),
-                        ),
-                        onSort: _handleSort,
-                      ),
-                      DataColumn(
-                          label: Text(
-                        'Acciones',
-                        style: GoogleFonts.lobster(),
-                      ))
-                    ],
-                    source: MyData(
-                        data: productListPage,
-                        onEdit: (product) =>
-                            {_showProductModal(context, product)},
-                        onDelete: (productId) => {print(productId)})));
+                    ),
+                    SizedBox(
+                        width:
+                            10), // Ajusta el espacio entre el TextField y el botón según tu preferencia
+                    ElevatedButton(
+                      onPressed: () {
+                        // Aquí puedes agregar la lógica para realizar la búsqueda
+                        String searchText = controller.text;
+                        print('Búsqueda realizada: $searchText');
+
+                        final nextProductsReq = productsReq.rebuild(
+                          (b) => b
+                            ..vars.filterCriteria.filter.type = "or"
+                            ..vars.filterCriteria.filter.filters.replace([
+                              GIFilterCriterion((b) => b
+                                ..property = "name"
+                                ..type = "like"
+                                ..value = searchText),
+                              GIFilterCriterion((b) => b
+                                ..property = "code"
+                                ..type = "like"
+                                ..value = searchText),
+                            ])
+                            ..fetchPolicy = FetchPolicy.NetworkOnly,
+                        );
+                        client.requestController.add(nextProductsReq);
+
+                        // Aquí puedes realizar acciones como enviar la búsqueda a una API, actualizar el estado, etc.
+                      },
+                      child: Text('Buscar'),
+                    ),
+                  ],
+                ),
+                SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: PaginatedDataTable(
+                        // controller: ScrollController(onAttach: (position) => print(position),),
+                        showFirstLastButtons: true,
+                        sortColumnIndex: _sortColumIndex,
+                        sortAscending: _orderSort,
+                        rowsPerPage: _pageSize,
+                        onPageChanged: (newPage) {
+                          _newPageIndex = newPage;
+                          _currentPage = (newPage / _pageSize + 1).toInt();
+                          refetchProductListPage();
+                        },
+                        onRowsPerPageChanged: (value) {
+                          _pageSize = value ?? 10;
+                          // _currentPage = 1;
+                          refetchProductListPage();
+                        },
+                        columns: [
+                          DataColumn(
+                            label: Text(
+                              "ID",
+                              style: GoogleFonts.lobster(),
+                            ),
+                            onSort: _handleSort,
+                          ),
+                          DataColumn(
+                            label: Text(
+                              "Codigo",
+                              style: GoogleFonts.lobster(),
+                            ),
+                            onSort: _handleSort,
+                          ),
+                          DataColumn(
+                            label: Text(
+                              "Nombre",
+                              style: GoogleFonts.lobster(),
+                            ),
+                            onSort: _handleSort,
+                          ),
+                          DataColumn(
+                            label: Text(
+                              "Precio",
+                              style: GoogleFonts.lobster(),
+                            ),
+                            onSort: _handleSort,
+                          ),
+                          DataColumn(
+                              label: Text(
+                            'Acciones',
+                            style: GoogleFonts.lobster(),
+                          ))
+                        ],
+                        source: MyData(
+                            data: productListPage,
+                            onEdit: (product) =>
+                                {_showProductModal(context, product)},
+                            onDelete: (productId) => {print(productId)})))
+              ],
+            );
           },
         ),
       ),
@@ -155,7 +207,7 @@ class _MyDataTableWidgetState extends State<MyDataTableWidget> {
         onPressed: () {
           _showProductModal(context, null);
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -283,7 +335,8 @@ class MyData extends DataTableSource {
       DataCell(Text(product.id)),
       DataCell(Text(product.code ?? "---")),
       DataCell(Text(product.name ?? "---")),
-      DataCell(Text(product.price?.toString() ?? "0")),
+      DataCell(
+          Text(product.price != null ? formatCurrency(product.price) : "0")),
       DataCell(Row(
         children: [
           IconButton(
